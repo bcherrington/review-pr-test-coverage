@@ -1,0 +1,62 @@
+# Comprehensive Test Coverage Review
+# Detailed test coverage analysis with custom testing guidelines
+
+name: Comprehensive Test Analysis
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+      - develop
+
+jobs:
+  comprehensive-test-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Comprehensive Test Coverage Analysis
+        uses: augmentcode/review-pr-test-coverage@v0
+        with:
+          augment_session_auth: ${{ secrets.AUGMENT_SESSION_AUTH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_number: ${{ github.event.pull_request.number }}
+          repo_name: ${{ github.repository }}
+          custom_guidelines: |
+            ## Project-Specific Testing Requirements
+            
+            ### Testing Framework
+            - We use Jest for unit and integration tests
+            - We use Cypress for E2E tests
+            - We use React Testing Library for component tests
+            
+            ### Coverage Requirements
+            - All new features must have unit tests
+            - API endpoints require integration tests
+            - Critical user flows need E2E tests
+            - Security-sensitive code requires security tests
+            
+            ### Testing Conventions
+            - Test files should be co-located with source files (*.test.ts)
+            - Use descriptive test names following "should [expected behavior] when [condition]"
+            - Mock external dependencies in unit tests
+            - Use test fixtures from /tests/fixtures
+            
+            ### Priority Areas
+            - Authentication and authorization flows (HIGH)
+            - Payment processing (HIGH)
+            - Data validation and sanitization (HIGH)
+            - API error handling (MEDIUM)
+            - UI component edge cases (MEDIUM)
+            
+            ### Performance Testing
+            - API endpoints should respond within 200ms for 95th percentile
+            - Database queries should be tested for N+1 issues
+            - Large dataset handling should be tested
+            
+            ### Security Testing
+            - All user inputs must be validated
+            - SQL injection tests for database queries
+            - XSS tests for user-generated content
+            - CSRF protection for state-changing operations

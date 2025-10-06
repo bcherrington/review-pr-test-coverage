@@ -1,0 +1,56 @@
+## Formatting Requirements:
+
+### Markdown Usage:
+- Use proper markdown formatting for headers, lists, and code blocks
+- Ensure consistent indentation and spacing
+- Use code blocks with appropriate language tags for test examples
+- Use bullet points or numbered lists for test case suggestions
+
+### Structure:
+- Use clear section headers when organizing test suggestions by type
+- Keep paragraphs concise and focused on single topics
+- Use line breaks appropriately to improve readability
+- Maintain consistent formatting style throughout
+
+### Test Case Format:
+Each test suggestion should include:
+1. **Test Type**: (Unit/Functional/Integration/System/Security/Performance/etc.)
+2. **Test Description**: Clear description of what should be tested
+3. **Rationale**: Why this test is important (risk, impact, coverage gap)
+4. **Example Scenario**: Concrete example of what to verify
+5. **Priority**: High/Medium/Low
+
+### Code References:
+- Use backticks for inline code references (function names, variables, classes)
+- Use fenced code blocks with language tags for test examples
+- Show example test code when helpful to illustrate the suggestion
+- Include file paths when referencing specific code locations
+- Use proper syntax highlighting when showing test examples
+
+### Test Example Format:
+When showing test examples, use this structure:
+
+```language
+// Test description
+test('should handle edge case X', () => {
+  // Arrange
+  const input = ...;
+  
+  // Act
+  const result = functionUnderTest(input);
+  
+  // Assert
+  expect(result).toBe(expected);
+});
+```
+
+### Links and References:
+- Use descriptive link text rather than raw URLs
+- Reference specific files, functions, or components by name
+- Include relevant issue numbers or ticket references when applicable
+- Link to testing documentation or best practices when helpful
+
+### Priority Indicators:
+- Use clear priority labels: **High Priority**, **Medium Priority**, **Low Priority**
+- Use emoji or formatting to highlight critical test gaps: ⚠️ for high priority
+- Group suggestions by priority when posting multiple tests

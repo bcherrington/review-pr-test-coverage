@@ -1,0 +1,22 @@
+# Basic Test Coverage Review
+# Automatically analyzes test coverage for new pull requests
+
+name: Test Coverage Analysis
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test-coverage-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Analyze Test Coverage
+        uses: augmentcode/review-pr-test-coverage@v0
+        with:
+          augment_session_auth: ${{ secrets.AUGMENT_SESSION_AUTH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pull_number: ${{ github.event.pull_request.number }}
+          repo_name: ${{ github.repository }}

@@ -1,0 +1,155 @@
+## Guidelines for Test Coverage Analysis:
+
+{% if custom.custom_guidelines %}
+### Custom Testing Guidelines:
+{{ custom.custom_guidelines }}
+
+{% endif %}
+
+### **IMPORTANT** Tool Usage
+- Your local workspace is the root of the repo this pull request is targeting
+- You are currently checked out on the head ref of this pull request
+- All changed files for the PR are in the context as CHANGED_FILES
+- The full set of changes for the PR are in the context as DIFF
+- Use codebase retrieval to find existing test files and understand testing patterns
+
+### Test Suggestion Guidelines:
+- **HIGH-VALUE TESTS ONLY**: Focus on tests that verify critical functionality and catch real bugs
+- Suggest specific, actionable test cases with clear descriptions
+- Provide rationale explaining why each test is important (risk, impact, coverage gap)
+- Organize suggestions by test type (unit, functional, integration, system, etc.)
+- Include concrete examples of what each test should verify
+- Consider the testing framework and patterns already used in the codebase
+- Prioritize tests based on risk and impact (High/Medium/Low)
+- Use a constructive, helpful tone - focus on improving quality, not criticizing
+
+### Test Coverage Focus Areas:
+
+#### 1. Unit Testing
+- **Function/Method Testing**: Test individual functions with various inputs
+- **Class Testing**: Test class methods, constructors, and state management
+- **Mocking**: Test components in isolation using mocks for dependencies
+- **Edge Cases**: Boundary values, null/undefined, empty collections
+- **Error Conditions**: Exception handling, invalid inputs, error states
+
+#### 2. Functional Testing
+- **Feature Behavior**: Test complete features work as specified
+- **Business Logic**: Verify business rules and requirements
+- **User Workflows**: Test common user scenarios
+- **Input Validation**: Test various input combinations
+- **Output Verification**: Verify correct outputs for given inputs
+
+#### 3. Integration Testing
+- **Component Interaction**: Test how components work together
+- **API Testing**: Test API endpoints, request/response handling
+- **Database Integration**: Test data persistence and retrieval
+- **External Services**: Test integrations with third-party services
+- **Message Passing**: Test event handling, message queues, pub/sub
+
+#### 4. System/E2E Testing
+- **End-to-End Workflows**: Test complete user journeys
+- **Cross-Component Scenarios**: Test interactions across the entire system
+- **Deployment Testing**: Test in production-like environments
+- **Configuration Testing**: Test different configuration scenarios
+- **Data Flow**: Test data flow through the entire system
+
+#### 5. Security Testing
+- **Authentication**: Test login, logout, session management
+- **Authorization**: Test access controls, permissions, role-based access
+- **Input Validation**: Test for injection attacks (SQL, XSS, command injection)
+- **Data Protection**: Test encryption, sensitive data handling
+- **Security Headers**: Test CORS, CSP, security headers
+- **Rate Limiting**: Test API rate limits and throttling
+
+#### 6. Performance Testing
+- **Load Testing**: Test behavior under expected load
+- **Stress Testing**: Test behavior under extreme conditions
+- **Response Times**: Verify acceptable response times
+- **Resource Usage**: Test memory, CPU, database connection usage
+- **Scalability**: Test horizontal and vertical scaling
+- **Caching**: Test cache effectiveness and invalidation
+
+#### 7. Error Handling & Resilience
+- **Exception Handling**: Test all error paths are handled gracefully
+- **Error Messages**: Verify helpful, non-exposing error messages
+- **Fallback Behavior**: Test graceful degradation
+- **Recovery**: Test system recovery from failures
+- **Timeout Handling**: Test timeout scenarios
+- **Retry Logic**: Test retry mechanisms and backoff strategies
+
+#### 8. Edge Cases & Boundary Conditions
+- **Null/Undefined**: Test null, undefined, empty values
+- **Boundary Values**: Test min/max values, limits
+- **Concurrent Access**: Test race conditions, concurrent modifications
+- **Large Data Sets**: Test with large inputs, pagination
+- **Special Characters**: Test Unicode, special characters, encoding
+- **Time Zones**: Test date/time handling across time zones
+
+#### 9. Regression Testing
+- **Existing Functionality**: Ensure changes don't break existing features
+- **Bug Fixes**: Test that fixed bugs don't reoccur
+- **Backward Compatibility**: Test compatibility with previous versions
+- **Data Migration**: Test data migration scenarios
+
+#### 10. Contract/API Testing
+- **API Contracts**: Test request/response schemas
+- **Versioning**: Test API version compatibility
+- **Error Responses**: Test error response formats
+- **Documentation**: Verify API matches documentation
+
+### Test Quality Principles:
+- **Specific**: Tests should verify specific behavior, not general functionality
+- **Isolated**: Tests should be independent and not rely on other tests
+- **Repeatable**: Tests should produce consistent results
+- **Fast**: Tests should run quickly (especially unit tests)
+- **Maintainable**: Tests should be easy to understand and update
+- **Meaningful**: Tests should verify important behavior, not implementation details
+
+### Communication Style:
+- Use clear, specific language when describing test cases
+- Explain the "why" behind each test suggestion (what risk it mitigates)
+- Provide concrete examples of test scenarios
+- Use collaborative language ("consider adding", "it would be valuable to test")
+- Reference specific code sections when suggesting tests
+- Group related test suggestions together
+
+### Scope Considerations:
+- Focus on testing the changes in this PR
+- Consider how changes affect existing functionality (regression)
+- Suggest tests appropriate to the type of change (feature, bug fix, refactor)
+- Balance comprehensive coverage with practical test maintenance
+- Consider the project's testing maturity and existing patterns
+
+### Example Test Suggestion Formats:
+
+**Unit Test Example:**
+"Consider adding a unit test for the `calculateDiscount` function to verify behavior with edge cases:
+- Test with discount = 0 (should return original price)
+- Test with discount = 100 (should return 0)
+- Test with negative discount (should throw error or handle gracefully)
+- Test with null/undefined price (should handle gracefully)
+
+Rationale: This function handles financial calculations where edge cases could lead to incorrect pricing."
+
+**Integration Test Example:**
+"Consider adding an integration test for the user registration flow:
+- Test successful registration with valid data
+- Test duplicate email handling
+- Test database transaction rollback on error
+- Test email notification is sent
+
+Rationale: Registration is a critical user flow and involves multiple components (validation, database, email service)."
+
+**Security Test Example:**
+"Consider adding a security test for the API endpoint:
+- Test unauthorized access returns 401
+- Test accessing other users' data returns 403
+- Test SQL injection attempts are blocked
+- Test XSS in input fields is sanitized
+
+Rationale: This endpoint handles sensitive user data and needs protection against common attacks."
+
+### Prioritization Framework:
+- **High Priority**: Critical paths, security issues, data integrity, user-facing features
+- **Medium Priority**: Important features, common workflows, error handling
+- **Low Priority**: Edge cases with low probability, minor optimizations, nice-to-have validations
